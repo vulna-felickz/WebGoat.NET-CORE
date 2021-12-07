@@ -1,4 +1,4 @@
-# WebGoat.NET version 0.1
+# WebGoat.NET version 0.1.1
 
 ## Build status
 
