@@ -78,10 +78,14 @@ jobs:
         upload: false
         output: sarif-results
     
+    - name: Find SARIF file
+      id: find_sarif
+      run: echo "SARIF_FILE=$(find $PWD/sarif-results -name '*.sarif' | head -n 1)" >> $GITHUB_ENV
+
     - name: Annotate CodeQL SARIF with OWASP Top 10 2021 tag
       uses: advanced-security/codeql-sarif-security-standard-annotator@v1
       with:
-        sarifFile: sarif-results/*.sarif
+        sarifFile: ${{ env.SARIF_FILE }}
     
     - name: Upload SARIF
       uses: github/codeql-action/upload-sarif@v3
