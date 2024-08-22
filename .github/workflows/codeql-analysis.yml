@@ -70,3 +70,16 @@ jobs:
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v3
+      with:
+        upload: false
+        output: sarif-results
+    
+    - name: Annotate CodeQL SARIF with OWASP Top 10 2021 tag
+      uses: advanced-security/codeql-sarif-security-standard-annotator@v1
+      with:
+        sarifFile: sarif-results/${{matrix.language}}.sarif
+    
+    - name: Upload SARIF
+      uses: github/codeql-action/upload-sarif@v3
+      with:
+        sarif_file: sarif-results/${{matrix.language}}.sarif
