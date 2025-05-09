@@ -3,6 +3,8 @@ name: Dependency SUbmission
 on:
   workflow_dispatch:
   push:
+  schedule:
+  - cron: '24 16 * * 6'
 
 permissions: 
   id-token: write
@@ -23,5 +25,5 @@ jobs:
       #   if: runner.os != 'Windows'
       #   uses: jhutchings1/component-detection-action@v0.0.1
       - name: Component detection 
-        uses: advanced-security/component-detection-dependency-submission-action@v0.0.3
+        uses: advanced-security/component-detection-dependency-submission-action@v0.0.5
 
