@@ -32,6 +32,19 @@ namespace WebGoatCore.Controllers
             });
         }
 
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult Login(string? returnUrl, string format)
+        {
+            // BAD: Uncontrolled format string.
+            var FormattedUrl = string.Format(format, returnUrl);
+        
+            return View(new LoginViewModel
+            {
+                ReturnUrl = FormattedUrl
+            });
+        }
+
         [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> Login(LoginViewModel model)
